@@ -1,0 +1,23 @@
+
+import { Module } from '@nestjs/common';
+import { MongooseModule } from '@nestjs/mongoose';
+import { DestinationsService } from './destinations.service';
+import { DestinationsController } from './destinations.controller';
+import {
+  Destination,
+  DestinationSchema,
+} from './schemas/destination.schema';
+
+@Module({
+  imports: [
+    MongooseModule.forFeature([
+      {
+        name: Destination.name,
+        schema: DestinationSchema,
+      },
+    ]),
+  ],
+  controllers: [DestinationsController],
+  providers: [DestinationsService],
+})
+export class DestinationsModule {}
