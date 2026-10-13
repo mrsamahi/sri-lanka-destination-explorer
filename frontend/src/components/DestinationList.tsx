@@ -1,6 +1,7 @@
 
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 
 type Destination = {
@@ -54,13 +55,17 @@ export default function DestinationList({
                 
         <div className="mb-5 overflow-hidden rounded-xl">
         <img
+            
             src={
             destination.name.toLowerCase() === "sigiriya"
                 ? "/images/sigiriya.jpg"
                 : destination.name.toLowerCase() === "ella"
                 ? "/images/ella.jpg"
-                : "/images/sigiriya.jpg"
+                : destination.name.toLowerCase() === "galle fort"
+                    ? "/images/galle-fort.jpg"
+                    : "/images/sigiriya.jpg"
             }
+
             alt={`Photo of ${destination.name}`}
             className="h-48 w-full object-cover"
         />
@@ -81,6 +86,14 @@ export default function DestinationList({
               <p className="mt-4 text-slate-600">
                 {destination.description}
               </p>
+              
+            <Link
+            href={`/destinations/${destination._id}`}
+            className="mt-5 inline-block rounded-lg bg-emerald-700 px-5 py-2 text-sm font-semibold text-white hover:bg-emerald-800"
+            >
+            View Details →
+            </Link>
+
             </article>
           ))}
         </div>
