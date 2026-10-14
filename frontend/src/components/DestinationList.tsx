@@ -53,23 +53,21 @@ export default function DestinationList({
               className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm" 
             >
                 
-        <div className="mb-5 overflow-hidden rounded-xl">
-        <img
-            
-            src={
-            destination.name.toLowerCase() === "sigiriya"
-                ? "/images/sigiriya.jpg"
-                : destination.name.toLowerCase() === "ella"
-                ? "/images/ella.jpg"
-                : destination.name.toLowerCase() === "galle fort"
-                    ? "/images/galle-fort.jpg"
-                    : "/images/sigiriya.jpg"
-            }
+        
+            <div className="mb-5 overflow-hidden rounded-xl">
+            {destination.imageUrl ? (
+                <img
+                src={destination.imageUrl}
+                alt={`Photo of ${destination.name}`}
+                className="h-48 w-full object-cover"
+                />
+            ) : (
+                <div className="flex h-48 items-center justify-center bg-emerald-50 text-center text-lg font-semibold text-emerald-800">
+                {destination.name}
+                </div>
+            )}
+            </div>
 
-            alt={`Photo of ${destination.name}`}
-            className="h-48 w-full object-cover"
-        />
-        </div>
 
               <span className="text-sm font-semibold text-emerald-700">
                 {destination.category}

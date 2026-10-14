@@ -5,4 +5,6 @@ export class CreateDestinationDto {
   description: string;
   category: string;
   imageUrl?: string;
+  latitude: number;
+  longitude: number;
 }

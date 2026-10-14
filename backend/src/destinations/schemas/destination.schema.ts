@@ -20,6 +20,12 @@ export class Destination {
 
   @Prop()
   imageUrl: string;
+
+  @Prop({ type: Number, required: true })
+  latitude: number;
+
+  @Prop({ type: Number, required: true })
+  longitude: number;
 }
 
 export const DestinationSchema = SchemaFactory.createForClass(Destination);

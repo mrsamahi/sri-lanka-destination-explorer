@@ -1,13 +1,28 @@
 
 import Link from "next/link";
 
+
 type Destination = {
   _id: string;
   name: string;
   district: string;
   description: string;
   category: string;
+  imageUrl?: string;
 };
+
+
+type Weather = {
+  temperature: number;
+  condition: string;
+  humidity: number;
+  windSpeed: number;
+  temperatureUnit: string;
+  humidityUnit: string;
+  windSpeedUnit: string;
+};
+
+
 
 export default async function DestinationDetails({
   params,
@@ -36,14 +51,24 @@ export default async function DestinationDetails({
 
   const destination: Destination = await response.json();
 
-  const image =
-    destination.name.toLowerCase() === "sigiriya"
-      ? "/images/sigiriya.jpg"
-      : destination.name.toLowerCase() === "ella"
-        ? "/images/ella.jpg"
-        : destination.name.toLowerCase() === "galle fort"
-          ? "/images/galle-fort.jpg"
-          : "/images/sigiriya.jpg";
+  
+let weather: Weather | null = null;
+
+try {
+  const weatherResponse = await fetch(
+    `http://localhost:3000/destinations/${id}/weather`,
+    { cache: "no-store" }
+  );
+
+  if (weatherResponse.ok) {
+    weather = (await weatherResponse.json()) as Weather;
+  }
+} catch {
+  // The destination page should still work if weather is unavailable.
+}
+
+
+  
 
   return (
     <main className="min-h-screen bg-emerald-50 px-6 py-12">
@@ -53,11 +78,19 @@ export default async function DestinationDetails({
         </Link>
 
         <div className="mt-8 overflow-hidden rounded-2xl bg-white shadow-lg">
-          <img
-            src={image}
+          
+        {destination.imageUrl ? (
+        <img
+            src={destination.imageUrl}
             alt={`Photo of ${destination.name}`}
             className="h-80 w-full object-cover"
-          />
+        />
+        ) : (
+        <div className="flex h-80 items-center justify-center bg-emerald-100 text-3xl font-bold text-emerald-800">
+            {destination.name}
+        </div>
+        )}
+
 
           <div className="p-8">
             <span className="rounded-full bg-emerald-100 px-3 py-1 text-sm text-emerald-800">
@@ -75,6 +108,41 @@ export default async function DestinationDetails({
             <p className="mt-6 text-lg leading-8 text-gray-700">
               {destination.description}
             </p>
+
+            <section className="mt-8 rounded-xl bg-emerald-50 p-6">
+            <h2 className="text-2xl font-bold text-gray-900">
+                Current Weather
+            </h2>
+
+            {weather ? (
+                <div className="mt-4 space-y-3 text-gray-700">
+                <p>
+                    🌡️ Temperature: {weather.temperature}
+                    {weather.temperatureUnit}
+                </p>
+
+                <p>
+                    ☁️ Condition: {weather.condition}
+                </p>
+
+                <p>
+                    💧 Humidity: {weather.humidity}
+                    {weather.humidityUnit}
+                </p>
+
+                <p>
+                    💨 Wind Speed: {weather.windSpeed}{" "}
+                    {weather.windSpeedUnit}
+                </p>
+                </div>
+            ) : (
+                <p className="mt-4 text-gray-600">
+                Weather information is temporarily unavailable.
+                </p>
+            )}
+            </section>
+
+
           </div>
         </div>
       </div>
