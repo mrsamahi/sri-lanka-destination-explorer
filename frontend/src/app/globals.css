@@ -1,26 +1,170 @@
 @import "tailwindcss";
 
+/* =========================================
+   SRI LANKA DESTINATION EXPLORER
+   GLOBAL DESIGN SYSTEM
+   ========================================= */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Change these colors to update the theme */
+  --brand-primary: #086b52;
+  --brand-primary-dark: #064c3c;
+  --brand-secondary: #d4a64e;
+
+  --brand-background: #f7f9f5;
+  --brand-surface: #ffffff;
+
+  --brand-text: #18302a;
+  --brand-muted: #64756f;
+
+  --brand-border: #e0e9e3;
+
+  /* Design settings */
+  --radius-card: 24px;
+  --shadow-card: 0 12px 35px rgba(13, 70, 53, 0.08);
+  --shadow-hover: 0 24px 55px rgba(13, 70, 53, 0.17);
+
+  /* Next.js theme variables */
+  --background: var(--brand-background);
+  --foreground: var(--brand-text);
 }
 
+/* Make colors available in Tailwind */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+
+  --color-brand: var(--brand-primary);
+  --color-brand-dark: var(--brand-primary-dark);
+  --color-gold: var(--brand-secondary);
+  --color-surface: var(--brand-surface);
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* =========================================
+   BASE STYLING
+   ========================================= */
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  margin: 0;
+  background: var(--brand-background);
+  color: var(--brand-text);
   font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--brand-secondary);
+  color: var(--brand-primary-dark);
+}
+
+/* =========================================
+   ANIMATIONS
+   ========================================= */
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes gentleFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.animate-fade-up {
+  animation: fadeUp 0.7s ease-out both;
+}
+
+.animate-float {
+  animation: gentleFloat 5s ease-in-out infinite;
+}
+
+/* =========================================
+   REUSABLE COMPONENT STYLES
+   ========================================= */
+
+.brand-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  padding: 12px 24px;
+  border-radius: 999px;
+
+  background: var(--brand-primary);
+  color: white;
+
+  font-weight: 600;
+  transition: background 0.3s ease,
+              transform 0.3s ease,
+              box-shadow 0.3s ease;
+}
+
+.brand-button:hover {
+  background: var(--brand-primary-dark);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-hover);
+}
+
+.premium-card {
+  background: var(--brand-surface);
+  border: 1px solid var(--brand-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+
+  overflow: hidden;
+
+  transition: transform 0.35s ease,
+              box-shadow 0.35s ease;
+}
+
+.premium-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-hover);
+}
+
+.premium-card img {
+  transition: transform 0.6s ease;
+}
+
+.premium-card:hover img {
+  transform: scale(1.06);
+}
+
+/* Accessibility: reduce motion when requested */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .animate-fade-up,
+  .animate-float {
+    animation: none;
+  }
+
+  .premium-card,
+  .premium-card img,
+  .brand-button {
+    transition: none;
+  }
 }
