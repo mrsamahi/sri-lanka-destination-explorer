@@ -1,117 +1,176 @@
+# CEYLON 🇱🇰
+### Sri Lanka Destination Explorer
 
-# Sri Lanka Destination Explorer 🇱🇰
+A full-stack tourism web application for discovering beautiful destinations across Sri Lanka.
 
-A full-stack web application for discovering popular tourist destinations in Sri Lanka.
+Built as a full-stack web development internship assessment using **Next.js, NestJS, TypeScript, and MongoDB Atlas**.
 
-## Project Overview
+## 🌐 Live Website
 
-Sri Lanka Destination Explorer helps visitors explore tourist attractions, search for destinations, and view detailed information about places they want to visit.
+**Website:** https://ceylon-frontend-production.up.railway.app
 
-The application uses Next.js for the frontend, NestJS for the backend, and MongoDB Atlas for storing destination information.
+**Backend API:** https://sri-lanka-destination-explorer-production.up.railway.app
 
-## Technologies Used
+## 📖 Project Overview
 
-### Frontend
-- Next.js
-- React
-- TypeScript
-- Tailwind CSS
+CEYLON helps users discover tourist destinations in Sri Lanka, search for places to visit, view destination information and photographs, and check weather information.
 
-### Backend
-- NestJS
-- Node.js
-- TypeScript
-- REST API
-- Mongoose
+The application also includes a protected admin dashboard for managing destinations.
 
-### Database
-- MongoDB Atlas
+## ✨ Features
 
-### Version Control
-- Git
-- GitHub
-
-## Features
-
-- Display tourist destinations from MongoDB Atlas
+### Visitor Features
+- Browse tourist destinations in Sri Lanka
 - Search destinations by name, district, or category
-- Display destination photographs
-- View individual destination details
-- Responsive interface using Tailwind CSS
-- REST API for managing destinations
+- View destination photographs and descriptions
+- Open individual destination detail pages
+- View weather information for destinations
+- Responsive interface for desktop and mobile
 
-## Example Destinations
+### Admin Features
+- Admin login with JWT authentication
+- Protected admin dashboard
+- Add new destinations
+- Edit existing destinations
+- Delete destinations
+- Manage destination details and image URLs
 
-- Sigiriya — Matale District
-- Ella — Badulla District
-- Galle Fort — Galle District
+## 🛠️ Technologies Used
 
-## Project Structure
+| Layer | Technologies |
+|---|---|
+| Frontend | Next.js, React, TypeScript, Tailwind CSS |
+| Backend | NestJS, Node.js, TypeScript |
+| Database | MongoDB Atlas, Mongoose |
+| Authentication | JWT |
+| Weather | Open-Meteo API |
+| Deployment | Railway |
+| Version Control | Git, GitHub |
+
+## 📁 Project Structure
 
 ```text
 sri-lanka-destination-explorer/
-├── backend/       # NestJS REST API
-├── frontend/      # Next.js web application
+├── backend/        # NestJS REST API
+├── frontend/       # Next.js application
 └── README.md
 ```
 
-## Running the Project Locally
+## 💻 Running the Project Locally
 
 ### Requirements
 
 - Node.js and npm
-- MongoDB Atlas account
+- MongoDB Atlas connection
 - Git
 
-### Backend
+### 1. Clone the Repository
 
-1. Open a terminal inside the backend folder.
-2. Install dependencies:
+```bash
+git clone https://github.com/mrsamahi/sri-lanka-destination-explorer.git
+cd sri-lanka-destination-explorer
+```
 
-   `npm install`
+**Note:** Repository access is required while the GitHub repository is private.
 
-3. Create a `.env` file inside `backend` and configure the MongoDB connection string using the environment variable expected by the application.
-4. Start the backend:
+### 2. Backend Setup
 
-   `npm run start:dev`
+```bash
+cd backend
+npm install
+```
 
-Backend URL: http://localhost:3000
+Create a `.env` file inside `backend` with the required environment variables:
 
-### Frontend
+```env
+MONGODB_URI=your_mongodb_connection_string
+ADMIN_USERNAME=your_admin_username
+ADMIN_PASSWORD_HASH=your_bcrypt_password_hash
+JWT_SECRET=your_secure_jwt_secret
+```
 
-1. Open a separate terminal inside the frontend folder.
-2. Install dependencies:
+Start the backend:
 
-   `npm install`
+```bash
+npm run start:dev
+```
 
-3. Start the frontend on port 3001:
+Backend runs at:
 
-   `npm run dev -- -p 3001`
+`http://localhost:3000`
 
-Frontend URL: http://localhost:3001
+### 3. Frontend Setup
 
-## API Endpoints
+Open another terminal:
+
+```bash
+cd frontend
+npm install
+```
+
+Create a `.env.local` file inside `frontend`:
+
+```env
+NEXT_PUBLIC_API_URL=http://localhost:3000
+```
+
+Start the frontend on port 3001:
+
+```bash
+npm run dev -- -p 3001
+```
+
+Open:
+
+`http://localhost:3001`
+
+## 🔌 API Endpoints
 
 | Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | /destinations | Get all destinations |
-| GET | /destinations/:id | Get one destination |
-| POST | /destinations | Create a destination |
-| PATCH | /destinations/:id | Update a destination |
-| DELETE | /destinations/:id | Delete a destination |
+|---|---|---|
+| GET | `/destinations` | Retrieve all destinations |
+| GET | `/destinations/:id` | Retrieve one destination |
+| GET | `/destinations/:id/weather` | Retrieve destination weather |
+| POST | `/auth/login` | Authenticate an administrator |
+| POST | `/destinations` | Create a destination (admin) |
+| PATCH | `/destinations/:id` | Update a destination (admin) |
+| DELETE | `/destinations/:id` | Delete a destination (admin) |
 
-## Security
+## 🔐 Security
 
-Database credentials are stored in a local `.env` file and should never be committed to GitHub.
+- Administrative operations require authentication.
+- Passwords are verified using a stored password hash.
+- JWT is used for authenticated API requests.
+- Sensitive environment variables are not included in the repository.
+- Database credentials and authentication secrets must never be committed to GitHub.
 
-## Future Improvements
+## 🚀 Deployment
 
-- Add more tourist destinations
-- Add category filters
-- Add user accounts and authentication
-- Add maps and location information
-- Deploy the application online
+The frontend and backend are deployed as separate Railway services.
 
-## Author
+- **Frontend:** Next.js application
+- **Backend:** NestJS REST API
+- **Database:** MongoDB Atlas
 
-Developed as a full-stack web development assessment project.
+The frontend connects to the deployed backend using `NEXT_PUBLIC_API_URL`.
+
+## 🧪 Functionality Tested
+
+- Live homepage and destination details
+- Admin login
+- Creating destinations
+- Editing destinations
+- Deleting destinations
+- Displaying destination images
+
+## 🔮 Future Improvements
+
+- Interactive destination maps
+- Advanced destination filters
+- User accounts and saved destinations
+- More tourist destinations
+- Additional travel-planning features
+
+## 👨‍💻 Author
+
+Developed as a full-stack web development internship assessment project.
