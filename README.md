@@ -99,6 +99,44 @@ Backend runs at:
 
 `http://localhost:3000`
 
+## Initial Data Setup
+
+The application requires one test administrator and three sample
+destinations: Colombo, Kandy, and Galle.
+
+### Sample Destinations
+
+The backend includes a seed script at `backend/scripts/seed.js`
+that inserts Colombo, Kandy, and Galle into MongoDB.
+
+To insert the sample destinations:
+
+1. Configure `backend/.env` with the MongoDB connection string.
+2. Open a terminal in the `backend` directory.
+3. Run:
+
+   ```bash
+   npm run seed
+   ```
+
+The script skips destinations with matching names to avoid
+inserting duplicates.
+
+**Important:** Use a development database when running the seed
+command. Do not run it against production unless intended.
+
+### Test Administrator
+
+The administrator account is configured using these environment
+variables:
+
+- `ADMIN_USERNAME`
+- `ADMIN_PASSWORD_HASH`
+- `JWT_SECRET`
+
+The administrator's password must be stored as a bcrypt hash.
+Demo login credentials should be provided securely to the reviewer.
+
 ### 3. Frontend Setup
 
 Open another terminal:
