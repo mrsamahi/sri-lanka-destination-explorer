@@ -26,17 +26,38 @@ export default function DestinationList({
 }) {
   const [search, setSearch] = useState("");
 
+  const [selectedCategory, setSelectedCategory] = useState("All");
+
+  const [currentPage, setCurrentPage] = useState(1);
+const destinationsPerPage = 6;
+
   const filteredDestinations = destinations.filter((destination) => {
     const searchText = search.trim().toLowerCase();
 
-    return [
-      destination.name,
-      destination.district,
-      destination.category,
-    ].some((value) =>
-      value.toLowerCase().includes(searchText)
-    );
+    const matchesSearch = [
+  destination.name,
+  destination.district,
+  destination.category,
+].some((value) =>
+  value.toLowerCase().includes(searchText)
+);
+
+const matchesCategory =
+  selectedCategory === "All" ||
+  destination.category.toLowerCase() ===
+    selectedCategory.toLowerCase();
+
+return matchesSearch && matchesCategory;
   });
+
+  const totalPages = Math.ceil(
+  filteredDestinations.length / destinationsPerPage
+);
+
+const paginatedDestinations = filteredDestinations.slice(
+  (currentPage - 1) * destinationsPerPage,
+  currentPage * destinationsPerPage
+);
 
   return (
     <div>
@@ -65,11 +86,38 @@ export default function DestinationList({
           placeholder="Search destinations..."
           aria-label="Search destinations"
           value={search}
-          onChange={(event) => setSearch(event.target.value)}
+          onChange={(event) => {
+  setSearch(event.target.value);
+  setCurrentPage(1);
+}}
           className="h-20 w-full rounded-2xl border border-[var(--brand-border)] bg-white pr-6 pl-20 text-lg text-[var(--brand-text)] shadow-md outline-none transition duration-300 placeholder:text-[var(--brand-muted)] focus:border-brand focus:shadow-xl focus:shadow-emerald-950/10"
         />
 
       </div>
+
+      {/* CATEGORY FILTERS */}
+<div className="mb-10 flex flex-wrap gap-3">
+  {["All", ...new Set(destinations.map((d) => d.category))].map(
+    (category) => (
+      <button
+        key={category}
+        type="button"
+        onClick={() => {
+  setSelectedCategory(category);
+  setCurrentPage(1);
+}}
+        aria-pressed={selectedCategory === category}
+        className={`min-h-11 rounded-full px-5 py-3 text-sm font-semibold transition-all duration-200 active:scale-95 ${
+          selectedCategory === category
+            ? "bg-brand text-white shadow-md"
+            : "border border-[var(--brand-border)] bg-white text-[var(--brand-text)] hover:border-brand hover:text-brand"
+        }`}
+      >
+        {category}
+      </button>
+    )
+  )}
+</div>
 
       {/* EMPTY SEARCH RESULT */}
       {filteredDestinations.length === 0 ? (
@@ -86,7 +134,7 @@ export default function DestinationList({
         </div>
       ) : (
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {filteredDestinations.map((destination) => {
+         {paginatedDestinations.map((destination) => {
             const imageSrc =
               destination.imageUrl ||
               destinationImages[destination.name.toLowerCase()] ||
@@ -166,6 +214,35 @@ export default function DestinationList({
               </article>
             );
           })}
+                </div>
+      )}
+
+      {/* PAGINATION CONTROLS */}
+      {totalPages > 1 && (
+        <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+          <button
+            type="button"
+            onClick={() => setCurrentPage((page) => Math.max(1, page - 1))}
+            disabled={currentPage === 1}
+            className="min-h-12 rounded-xl bg-brand px-6 py-3 font-semibold text-white transition active:scale-95 disabled:cursor-not-allowed disabled:opacity-40"
+          >
+            ← Previous
+          </button>
+
+          <span className="text-sm font-semibold text-[var(--brand-text)]">
+            Page {currentPage} of {totalPages}
+          </span>
+
+          <button
+            type="button"
+            onClick={() =>
+              setCurrentPage((page) => Math.min(totalPages, page + 1))
+            }
+            disabled={currentPage === totalPages}
+            className="min-h-12 rounded-xl bg-brand px-6 py-3 font-semibold text-white transition active:scale-95 disabled:cursor-not-allowed disabled:opacity-40"
+          >
+            Next →
+          </button>
         </div>
       )}
     </div>
