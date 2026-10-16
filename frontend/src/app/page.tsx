@@ -1,6 +1,8 @@
 
 import Link from "next/link";
 import DestinationList from "@/components/DestinationList";
+import NavigationMenu from "@/components/NavigationMenu";
+export const dynamic = "force-dynamic";
 
 type Destination = {
   _id: string;
@@ -54,20 +56,7 @@ export default async function Home() {
             </span>
           </Link>
 
-          <div className="flex items-center gap-6 text-sm font-medium">
-            <Link href="/" className="transition hover:text-gold">
-              Home
-            </Link>
-            <a href="#destinations" className="transition hover:text-gold">
-              Destinations
-            </a>
-            <Link
-              href="/admin/login"
-              className="rounded-full border border-white/40 px-5 py-2.5 transition hover:border-gold hover:bg-gold hover:text-[var(--brand-primary-dark)]"
-            >
-              Admin Login
-            </Link>
-          </div>
+          <NavigationMenu />
         </nav>
       </header>
 

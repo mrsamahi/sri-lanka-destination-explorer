@@ -307,14 +307,18 @@ export default function AdminDashboard() {
                   </div>
 
                   <div className="flex flex-1 flex-col p-7">
-                    <p className="text-sm text-[var(--brand-muted)]">
-                      <span className="mr-2 text-gold">●</span>
-                      {destination.district} District
-                    </p>
-
-                    <h3 className="mt-3 font-serif text-3xl font-semibold text-[var(--brand-text)]">
+                    <h3 className="min-w-0 max-w-full break-words font-serif text-2xl font-semibold leading-snug text-[var(--brand-text)] sm:text-3xl [overflow-wrap:anywhere]">
                       {destination.name}
                     </h3>
+
+                    <p className="mt-2 flex min-w-0 items-start gap-2 text-sm font-medium text-[var(--brand-muted)]">
+                      <span aria-hidden="true" className="shrink-0">
+                        📍
+                      </span>
+                      <span className="min-w-0 break-words">
+                        {destination.district} District, Sri Lanka
+                      </span>
+                    </p>
 
                     <div className="mt-7 flex flex-wrap gap-3 border-t border-[var(--brand-border)] pt-6">
                       <Link
@@ -331,9 +335,31 @@ export default function AdminDashboard() {
                         disabled={deletingId === destination._id}
                         className="inline-flex flex-1 items-center justify-center gap-2 rounded-xl border border-red-200 bg-red-50 px-5 py-3 text-sm font-bold text-red-700 transition hover:bg-red-100 disabled:cursor-not-allowed disabled:opacity-50"
                       >
-                        {deletingId === destination._id
-                          ? "Deleting..."
-                          : "✕ Delete"}
+                        {deletingId === destination._id ? (
+                        "Deleting..."
+                      ) : (
+                        <>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="18"
+                            height="18"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            aria-hidden="true"
+                          >
+                            <path d="M3 6h18" />
+                            <path d="M8 6V4h8v2" />
+                            <path d="M19 6l-1 14H6L5 6" />
+                            <path d="M10 10v7" />
+                            <path d="M14 10v7" />
+                          </svg>
+                          <span>Delete</span>
+                        </>
+                      )}
                       </button>
                     </div>
                   </div>

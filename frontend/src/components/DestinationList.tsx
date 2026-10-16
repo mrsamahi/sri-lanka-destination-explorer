@@ -134,16 +134,18 @@ export default function DestinationList({
 
                 {/* CARD CONTENT */}
                 <div className="flex flex-1 flex-col p-7">
-                  <div className="mb-3 flex items-center gap-2 text-sm font-medium text-[var(--brand-muted)]">
-                    <span className="text-[var(--brand-secondary)]">
-                      ●
-                    </span>
-                    {destination.district} District, Sri Lanka
-                  </div>
-
-                  <h3 className="font-serif text-3xl font-semibold tracking-tight text-[var(--brand-text)] transition-colors duration-300 group-hover:text-brand">
+                  <h3 className="min-w-0 max-w-full break-words font-serif text-2xl font-semibold leading-snug tracking-tight text-[var(--brand-text)] transition-colors duration-300 group-hover:text-brand sm:text-3xl [overflow-wrap:anywhere]">
                     {destination.name}
                   </h3>
+
+                  <div className="mt-2 flex min-w-0 items-start gap-2 text-sm font-medium text-[var(--brand-muted)]">
+                    <span aria-hidden="true" className="shrink-0 text-[var(--brand-secondary)]">
+                      📍
+                    </span>
+                    <span className="min-w-0 break-words">
+                      {destination.district} District, Sri Lanka
+                    </span>
+                  </div>
 
                   <p className="mt-4 flex-1 leading-7 text-[var(--brand-muted)]">
                     {destination.description}
@@ -152,7 +154,7 @@ export default function DestinationList({
                   <div className="mt-7 border-t border-[var(--brand-border)] pt-5">
                     <Link
                       href={`/destinations/${destination._id}`}
-                      className="inline-flex items-center gap-3 text-sm font-bold uppercase tracking-wider text-brand transition duration-300 hover:gap-5"
+                      className="inline-flex min-h-12 w-full items-center justify-center gap-3 rounded-xl bg-brand px-4 py-3 text-center text-sm font-bold uppercase tracking-wide text-white shadow-md transition duration-300 hover:bg-[var(--brand-primary-dark)] hover:shadow-lg active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
                     >
                       Discover Destination
                       <span aria-hidden="true" className="text-lg">
