@@ -100,15 +100,13 @@ export default async function Home() {
             <div className="mt-10 flex flex-wrap items-center gap-5">
               <a
                 href="#destinations"
-                className="inline-flex items-center gap-3 rounded-full bg-gold px-8 py-4 font-bold text-[#18302a] shadow-xl shadow-black/15 transition duration-300 hover:-translate-y-1 hover:bg-[#e9be70]"
+                className="inline-flex min-h-12 items-center justify-center gap-3 rounded-full bg-gold px-8 py-4 font-bold text-[#18302a] shadow-xl shadow-black/15 transition-all duration-200 hover:-translate-y-1 hover:bg-[#e9be70] active:scale-90 active:bg-[#e9be70] active:shadow-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
               >
                 Explore Destinations
                 <span aria-hidden="true">↗</span>
               </a>
 
-              <span className="text-sm text-white/75">
-                Your journey begins here
-              </span>
+              
             </div>
           </div>
         </div>

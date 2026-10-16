@@ -11,6 +11,7 @@ type Destination = {
   district: string;
   category: string;
   imageUrl?: string;
+  description: string;
 };
 
 const destinationImages: Record<string, string> = {
@@ -318,6 +319,10 @@ export default function AdminDashboard() {
                       <span className="min-w-0 break-words">
                         {destination.district} District, Sri Lanka
                       </span>
+                    </p>
+
+                    <p className="mt-4 break-words text-sm leading-7 text-[var(--brand-muted)]">
+                      {destination.description || "No description added yet."}
                     </p>
 
                     <div className="mt-7 flex flex-wrap gap-3 border-t border-[var(--brand-border)] pt-6">
