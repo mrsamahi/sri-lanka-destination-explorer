@@ -33,7 +33,7 @@ export default function NavigationMenu() {
   }, []);
 
   return (
-    <div ref={menuRef} className="relative">
+    <div ref={menuRef} className="relative ml-auto">
       <button
         type="button"
         aria-expanded={isOpen}
