@@ -39,7 +39,7 @@ export default function NavigationMenu() {
         aria-expanded={isOpen}
         aria-controls="ceylon-navigation-menu"
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-3 rounded-xl border border-white/50 px-5 py-3 font-semibold transition hover:border-gold hover:bg-white/10"
+        className="flex items-center gap-2 rounded-xl border border-white/50 px-3 py-2 text-sm font-semibold transition hover:border-gold hover:bg-white/10 sm:gap-3 sm:px-5 sm:py-3 sm:text-base"
       >
         <span aria-hidden="true">☰</span>
         <span>Menu</span>
