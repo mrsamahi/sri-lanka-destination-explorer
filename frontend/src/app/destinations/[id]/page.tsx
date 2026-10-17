@@ -135,7 +135,7 @@ const imageSrc =
               {destination.category}
             </span>
 
-            <h1 className="mt-6 font-serif text-6xl font-semibold tracking-tight sm:text-7xl lg:text-8xl">
+            <h1 className="mt-6 max-w-full break-words font-serif text-4xl font-semibold leading-tight tracking-tight sm:text-7xl lg:text-8xl">
               {destination.name}
             </h1>
 
