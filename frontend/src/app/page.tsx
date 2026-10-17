@@ -40,7 +40,7 @@ export default async function Home() {
     <main className="min-h-screen bg-background">
       {/* NAVIGATION */}
       <header className="relative z-20 border-b border-white/15 bg-[var(--brand-primary-dark)] text-white">
-        <nav className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-6 py-5">
+        <nav className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-4 py-5 sm:px-6">
           <Link href="/" className="flex items-center gap-3">
             <span className="flex h-11 w-11 items-center justify-center rounded-full border border-gold/70 text-2xl">
               ✺
@@ -56,7 +56,9 @@ export default async function Home() {
             </span>
           </Link>
 
-          <NavigationMenu />
+          <div className="ml-auto shrink-0">
+  <NavigationMenu />
+</div>
         </nav>
       </header>
 
