@@ -19,6 +19,9 @@ const destinationImages: Record<string, string> = {
   galle: "/images/Galle.jpg",
 };
 
+const normalizeCategory = (category: string) =>
+  category.trim().toLowerCase();
+
 export default function DestinationList({
   destinations,
 }: {
@@ -44,8 +47,8 @@ const destinationsPerPage = 6;
 
 const matchesCategory =
   selectedCategory === "All" ||
-  destination.category.toLowerCase() ===
-    selectedCategory.toLowerCase();
+  normalizeCategory(destination.category) ===
+    normalizeCategory(selectedCategory);
 
 return matchesSearch && matchesCategory;
   });
@@ -97,10 +100,15 @@ const paginatedDestinations = filteredDestinations.slice(
 
       {/* CATEGORY FILTERS */}
 <div className="mb-10 flex flex-wrap gap-3">
-  {["All", ...new Set(destinations.map((d) => d.category))].map(
+  {[
+  "All",
+  ...new Set(destinations.map((d) => normalizeCategory(d.category))),
+].map(
     (category) => (
       <button
-        key={category}
+        key={category === "All"
+  ? "All"
+  : category.charAt(0).toUpperCase() + category.slice(1)}
         type="button"
         onClick={() => {
   setSelectedCategory(category);
